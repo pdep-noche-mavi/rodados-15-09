@@ -65,4 +65,4 @@ Va una ayudita: la capacidad faltante de deportes es de 25 personas (la flota pu
 
 <br/>
 
-<img src="diagramaDeClases.png">
+
