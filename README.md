@@ -1,6 +1,4 @@
 # Flotas de rodados
- 
-[![Build Status](https://travis-ci.org/wollok/flotasDeRodados.svg?branch=master)](https://travis-ci.org/wollok/flotasDeRodados)
 
 
 En este ejercicio vamos a construir un modelo que pueda servir para la administración de las flotas de rodados que utilizan las distintas dependencias de la Municipalidad de Coronel Vallejos. 
@@ -66,3 +64,5 @@ Para cada dependencia, hacer asserts sobre: el peso total de la flota, si está 
 Va una ayudita: la capacidad faltante de deportes es de 25 personas (la flota puede llevar: 12 personas en los 3 Corsa, más 3 del Kwid y 5 del auto especial; total 20), mientras que la de cultura es de 5 personas (puede llevar en total 26: 6 de los Kwid con tanque adicional, más 4 de la Kwid sin tanque, más 4 de cachito, más 12 de la Trafic dado que tiene el interior popular).	
 
 <br/>
+
+<img src="diagramaDeClases.png">
