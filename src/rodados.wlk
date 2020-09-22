@@ -60,9 +60,33 @@ object motorBataton {
 	const property velocidadMaxima = 80
 }
 class AutoEspecial {
-	
-	
+	const property capacidad 
+	const property velocidadMaxima 
+	const property peso 	
+	const property color	
 }
 class Dependencia {
 	var empleados 
+	const flotaDeRodados =[]
+	
+	method agregarAFlota(rodado){
+		flotaDeRodados.add(rodado)
+	} 
+	method quitarDeFlota(rodado){
+		flotaDeRodados.remove(rodado)
+		throw new Exception(message="jdsakjsdak")
+	}
+	method pesoTotalFlota() = flotaDeRodados.sum({rodado => rodado.peso()})
+	
+	method cantidadRodados() = flotaDeRodados.size()
+
+	method estaBienEquipada() = self.cantidadRodados() >= 3 and flotaDeRodados.all({rodado => rodado.velocidadMaxima() >= 100})
+
+	method capacidadTotalEnColor(color) = flotaDeRodados.filter({rodado => rodado.color() == color}).sum({rodado => rodado.capacidad()})
+	
+	method colorDelRodadoMasRapido() = flotaDeRodados.max({rodado => rodado.velocidadMaxima()}).color()
+	
+	method capacidadFaltante() = empleados - flotaDeRodados.sum({rodado => rodado.capacidad()})
+
+	method esGrande() = empleados > 40 and self.cantidadRodados() > 5
 }
