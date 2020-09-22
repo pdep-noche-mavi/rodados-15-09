@@ -64,6 +64,7 @@ Para cada dependencia, hacer asserts sobre: el peso total de la flota, si está 
 Va una ayudita: la capacidad faltante de deportes es de 25 personas (la flota puede llevar: 12 personas en los 3 Corsa, más 3 del Kwid y 5 del auto especial; total 20), mientras que la de cultura es de 5 personas (puede llevar en total 26: 6 de los Kwid con tanque adicional, más 4 de la Kwid sin tanque, más 4 de cachito, más 12 de la Trafic dado que tiene el interior popular).	
 
 <br/>
+
 ## Etapa 2 - La muni se achica
 Se conoce a la municipalidad, que maneja un monto de caja y conoce a todas sus dependencias. En ocasiones, precisa plata, y entonces vende un rodado.
 Para modelar esto, tengamos en cuenta que ahora cada rodado tiene su valor. Y cuidado! No pueden quedar dependencias con capacidad faltante si vendemos el rodado, no deberíamos poder venderlo si es así.
