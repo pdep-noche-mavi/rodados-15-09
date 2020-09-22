@@ -74,14 +74,13 @@ class Dependencia {
 	} 
 	method quitarDeFlota(rodado){
 		flotaDeRodados.remove(rodado)
-		throw new Exception(message="jdsakjsdak")
 	}
 	method pesoTotalFlota() = flotaDeRodados.sum({rodado => rodado.peso()})
 	
 	method cantidadRodados() = flotaDeRodados.size()
 
 	method estaBienEquipada() = self.cantidadRodados() >= 3 and flotaDeRodados.all({rodado => rodado.velocidadMaxima() >= 100})
-
+	
 	method capacidadTotalEnColor(color) = flotaDeRodados.filter({rodado => rodado.color() == color}).sum({rodado => rodado.capacidad()})
 	
 	method colorDelRodadoMasRapido() = flotaDeRodados.max({rodado => rodado.velocidadMaxima()}).color()
