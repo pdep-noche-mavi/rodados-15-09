@@ -1,4 +1,5 @@
 class Corsa {
+	const property valor = 10000
 	const property capacidad = 4
 	const property velocidadMaxima = 150
 	const property peso = 1300
@@ -7,17 +8,18 @@ class Corsa {
 }
 
 object tanqueAdicional {
-	const property capacidad = 4
+	const property capacidad = 3
 	const property peso = 150
 	const property velocidadMaxima = 120
 }
 object tanqueBasico {
-	const property capacidad = 3
+	const property capacidad = 4
 	const property peso = 0
 	const property velocidadMaxima = 110
 }
 
 class Kwid {
+	const property valor = 10000
 	const color = "azul"
 	const pesoBase = 1200
 	var tanque 
@@ -28,6 +30,7 @@ class Kwid {
 	method velocidadMaxima() = tanque.velocidadMaxima()
 }
 object traffic {
+	const property valor = 10000
 	var interior
 	var motor
 	const property color = "blanco"
@@ -60,6 +63,7 @@ object motorBataton {
 	const property velocidadMaxima = 80
 }
 class AutoEspecial {
+	const property valor = 10000
 	const property capacidad 
 	const property velocidadMaxima 
 	const property peso 	
@@ -73,6 +77,9 @@ class Dependencia {
 		flotaDeRodados.add(rodado)
 	} 
 	method quitarDeFlota(rodado){
+		if (self.capacidadFaltante() + rodado.capacidad() > 0){
+			throw new DomainException(message="Dependencia con capacidad faltante")
+		}
 		flotaDeRodados.remove(rodado)
 	}
 	method pesoTotalFlota() = flotaDeRodados.sum({rodado => rodado.peso()})
@@ -89,3 +96,23 @@ class Dependencia {
 
 	method esGrande() = empleados > 40 and self.cantidadRodados() > 5
 }
+
+object municipalidad{
+	const dependencias = new List()
+	var caja = 0
+	
+	method caja() = caja
+	method vender(unRodado){
+		dependencias.forEach({
+			dependencia => dependencia.quitarDeFlota(unRodado)
+		})
+		caja = caja + unRodado.valor()
+	}
+	
+	method agregarDependencia(unaDependencia){
+		dependencias.add(unaDependencia)
+	}
+	
+}
+
+

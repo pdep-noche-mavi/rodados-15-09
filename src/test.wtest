@@ -1,0 +1,71 @@
+import rodados.*
+describe "Tests de flotas de rodados" {
+	
+	const dependenciaSinRodados = new Dependencia(empleados=0)
+	const dependenciaConRodados = new Dependencia(empleados=0)
+	const cachito = new Corsa(color="rojo")
+	const autoEspecial1 = new AutoEspecial(capacidad=4, velocidadMaxima=100, peso=1000, color="rojo")
+	const autoEspecial2 = new AutoEspecial(capacidad=4, velocidadMaxima=100, peso=1200, color="rojo")
+	const deportes = new Dependencia(empleados=45)
+	const cultura = new Dependencia(empleados=31)
+	
+	fixture {
+		traffic.configurar(interiorPopular, motorBataton)
+		
+		deportes.agregarAFlota(cachito)
+		deportes.agregarAFlota(new Corsa(color="azul"))
+		deportes.agregarAFlota(new Corsa(color="verde"))
+		deportes.agregarAFlota(new Kwid(tanque=tanqueAdicional))
+		deportes.agregarAFlota(new AutoEspecial(capacidad=5, velocidadMaxima=160, peso=1200, color="beige"))
+		
+		cultura.agregarAFlota(cachito)
+		cultura.agregarAFlota(new Kwid(tanque=tanqueAdicional))
+		cultura.agregarAFlota(new Kwid(tanque=tanqueAdicional))
+		cultura.agregarAFlota(new Kwid(tanque=tanqueBasico))
+		cultura.agregarAFlota(traffic)
+	}
+	
+	//TODO tests de traffic con diferentes configuraciones	
+	//TODO tests de kwid con diferentes configuraciones	
+	
+	test "Una dependencia sin rodados tiene peso nulo" {
+		assert.equals(0, dependenciaSinRodados.pesoTotalFlota())
+	}
+	test "Una dependencia con rodados calcula el peso total" {
+		dependenciaConRodados.agregarAFlota(autoEspecial1)
+		dependenciaConRodados.agregarAFlota(autoEspecial2)
+		assert.equals(2200, dependenciaConRodados.pesoTotalFlota())
+	}
+	test "La dependencia de deportes con rodados calcula bien la capacidad faltante"{
+		assert.equals(25, deportes.capacidadFaltante())
+	}
+	test "Una dependencia de cultura con rodados calcula bien la capacidad faltante"{
+		assert.equals(5, cultura.capacidadFaltante())
+	}
+	//TODO test el peso total de la flota 
+	//TODO test si está o no bien equipada
+	//TODO test la capacidad total en color azul, 
+	//TODO test el color del rodado más rápido
+	//TODO test si es grande o no
+	test "La municipalidad vende un rodado"{
+		const dependencia = new Dependencia(empleados=5)
+		dependencia.agregarAFlota(cachito)
+		dependencia.agregarAFlota(autoEspecial1)
+		dependencia.agregarAFlota(autoEspecial2)
+		//capacidad 8
+		
+		municipalidad.agregarDependencia(dependencia)
+		municipalidad.vender(cachito)
+		
+		assert.equals(cachito.valor(), municipalidad.caja())
+	}
+	test "La municipalidad no puede vender un rodado"{
+		const dependencia = new Dependencia(empleados=5)
+		dependencia.agregarAFlota(cachito)
+		//capacidad 4
+		
+		municipalidad.agregarDependencia(dependencia)
+		assert.throwsExceptionWithMessage("Dependencia con capacidad faltante", {municipalidad.vender(cachito)})
+		assert.equals(0, municipalidad.caja())
+	}
+}
